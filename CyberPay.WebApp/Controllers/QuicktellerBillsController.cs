@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace CyberPay.WebApp.Controllers
@@ -36,6 +37,20 @@ namespace CyberPay.WebApp.Controllers
         {
             var banksCodes = billProvider.GetBanksCodes();
             ApiResult<List<QuicktellerBiller>> res = new ApiResult<List<QuicktellerBiller>>();
-            return Request.CreateResponse(banksCodes);        }
+            return Request.CreateResponse(banksCodes);
+        }
+       
+        [HttpPost]
+        [Route("sendPaymentTransactions")]
+        public async Task<IHttpActionResult> SendPaymentTransactions(SendBillPaymentTransaction model)
+        {
+            if (ModelState.IsValid)
+            {
+                var send = billProvider.SendBillPaymentTransaction(model.Amount,model.PinData,model.SecureData,model.MSISDN,model.TransactionRef,model.CardBin);
+                ApiResult<SendBillPaymentTransaction> res = new ApiResult<SendBillPaymentTransaction>();
+                return Created("QuickTellerBillProvider/SendBillPaymentTransaction", send);
+            }
+            return BadRequest(ModelState);
+        }
     }
 }

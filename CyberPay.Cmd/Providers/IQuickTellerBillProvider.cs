@@ -17,5 +17,6 @@ namespace CyberPay.Cmd.Providers
 
         QuicktellerPaymentItemsViewModel GetBillerById(string billerId);
         List<QuickTellerBanksViewModel> GetBanksCodes();
+        SendBillPaymentTransaction SendBillPaymentTransaction(decimal amount, string pindata, string securedata, long msisdn, string transactionref,long cardbin );
     }
 }

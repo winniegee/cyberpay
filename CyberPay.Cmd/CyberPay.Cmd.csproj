@@ -61,6 +61,7 @@
     <Compile Include="Payload\Quickteller\QuicktellerPaymentItem.cs" />
     <Compile Include="Payload\Quickteller\QuicktellerPaymentItemsViewModel.cs" />
     <Compile Include="Payload\Quickteller\QuicktellerServiceJSONResponse.cs" />
+    <Compile Include="Payload\Quickteller\SendBillPaymentTransaction.cs" />
     <Compile Include="Payload\Quickteller\ServiceError.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\IQuickTellerBillProvider.cs" />

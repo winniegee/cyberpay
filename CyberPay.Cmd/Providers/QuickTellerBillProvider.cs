@@ -178,7 +178,23 @@ namespace CyberPay.Cmd.Providers
             return responseobject;
         }
 
-
+        public SendBillPaymentTransaction SendBillPaymentTransaction(decimal amount, string pindata, string securedata, long msisdn, string transactionref, long cardbin)
+        {
+            SendBillPaymentTransaction sendBillPaymentTransaction = new SendBillPaymentTransaction()
+            {
+                Amount = (amount * 100),
+                PinData = pindata,
+                SecureData =securedata,
+                MSISDN = msisdn,
+                TransactionRef = transactionref,
+                CardBin = cardbin
+            };
+            var serializedResponse = JsonConvert.SerializeObject(sendBillPaymentTransaction);
+            var transactionResponse = this.SendRequest(serializedResponse,
+                $"{ConfigurationManager.AppSettings["QuicktellerUrl"]}/transactions", "POST");
+            var responseobject = JsonConvert.DeserializeObject<SendBillPaymentTransaction>(transactionResponse);
+            return responseobject;
+        }
 
         private string GetRequestToken()
         {
@@ -539,6 +555,6 @@ namespace CyberPay.Cmd.Providers
             return responseobject.BankCodes;
         }
 
-
+        
     }
 }
